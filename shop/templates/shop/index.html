@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="section-top">
+        <img src="{% static 'static_prod/img/header1.jpg' %}" class="img-responsive">
+    </div>
+
+    <div class="section section1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="under-head">
+                        Новинки
+                    </h1>
+                </div>
+
+                {% for productsIMG in productsIMG %}
+                    {% include 'shop/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="section section2 rose-container">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-12">
+                    <h1 class="under-head">
+                        Розы
+                    </h1>
+                </div>
+
+                {% for productsIMG in productsIMG_rose %}
+                    {% include 'shop/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="section section3 other-container">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-12">
+                    <h1 class="under-head">
+                       Ассорти
+                    </h1>
+                </div>
+
+                {% for productsIMG in productsIMG_other %}
+                    {% include 'shop/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

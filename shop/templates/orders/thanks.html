@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Спасибо
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Спасибо за заказ!</h2>
+            <h4>Наш консультант скоро свяжется с Вами.</h4>
+            <a href="{% url "index" %}"><button class="btn btn-success">На главную</button></a>
+        </div>
+    </div>
+{% endblock %}

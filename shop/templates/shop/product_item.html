@@ -1,0 +1,26 @@
+<div class="col-lg-3">
+    <div class="product-item">
+        <div >
+            <a href="{% url "product" productsIMG.product.id %}">
+                <img src="{{ productsIMG.image.url }}" height="150">
+            </a>
+        </div>
+{#        <div>#}
+{#            <img src="{{ productsIMG.image.url }}" class="img-responsive-prod">#}
+{#        </div>#}
+        <h4>{{ productsIMG.product.name_product }}</h4>
+        <p>
+            {{ productsIMG.product.short_description|truncatechars_html:70}}
+        </p>
+        <div>
+            {{productsIMG.product.price}} руб
+        </div>
+        <div class="add-to-card=btn">
+            <a href="{% url "product" productsIMG.product.id%}">
+                <button class="btn-btn-saccess">
+                Подробнее
+            </button>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Корзина
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-left">Корзина</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <form class="form-row" action="{% url "basket_update" %}" method="POST" name="order" id="order">
+                    {% csrf_token %}
+                </form>
+                <div class="mb-2 ml-auto">
+                    <div class="btn-group">
+                        <div class="dropdown ml-4">
+                            <button class="btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+                                Очистить корзину
+                            </button>
+                            <div class="dropdown-menu">
+                                <form method="GET" action="{% url "basket_del_all" %}" id="form_del">
+                                    <a class="dropdown-item" id="clear_all"
+                                       style="text-decoration: none; color: green;">
+                                        <button type="submit" form="form_del" class="dropdown-item">Удалить все</button>
+                                    </a>
+                                    <br/>
+                                    <a class="dropdown-item" href="{% url "basket_del" %}" id="del_selected"
+                                       style="text-decoration: none; color: green;">
+                                        <button type="submit" form="form_del" class="dropdown-item">Удалить выбранное
+                                        </button>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover form-group">
+                    <thead valign="middle" align="center">
+                    <tr>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Сумма</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cart_body">
+                    {% for product in request.session.cart %}
+                        <tr valign="middle" align="center">
+                            <td>
+                                <p>{{ product.name_product }} </p>
+                                <input type="hidden" value="{{ product.product_id }}" class="hidden" form="order">
+                            </td>
+                            <td>
+                                <span class="product_price">
+                                   {{ product.price }}
+                                </span>
+                            </td>
+                            <td>
+                                <input class="w-50 product_amount" type="number" value="{{ product.nmb }}"
+                                       min="1"
+                                       step="1" name="product_in_bascket_{{ product.product_id }}" form="order">
+                            </td>
+                            <td><span class="total_product_in_basket_amount">
+                                    {{ product.total_price }}
+                                </span>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="is_del" class="checkbox" form="form_del"
+                                       value="{{ product.product_id }}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="float-right ml-auto">
+                    <b>Сумма заказа: <span id="total_order_amount"></span> <i class="fa fa-rub"></i></b>
+                </div>
+
+                <div class="float-right mt-2">
+                    <a href="{% url "prepare_order" %}">
+                        <button type="submit" class="btn btn-success">Оформить заказ</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
